@@ -274,3 +274,38 @@ grouped_test2.get_group('4wd')['price']
 f_val, p_val = stats.f_oneway(grouped_test2.get_group('fwd')['price'], grouped_test2.get_group('rwd')['price'], grouped_test2.get_group('4wd')['price'])  
 print( "ANOVA results: F=", f_val, ", P =", p_val)
 
+
+
+DATA VISUALIZATION
+
+#Scatter Plot 
+##(good way to visualize Continuous numerical variables ["int64" or "float64”])
+sns.regplot(x="engine-size", y="price", data=df)
+
+#Scatter Plot starts with Y = 0
+sns.regplot(x="engine-size", y="price", data=df)
+plt.ylim(0,)
+
+#Box Plot
+##(good way to visualize categorical variables [“object" or "int64”])
+sns.boxplot(x="body-style", y="price", data=df)
+
+#Heat Map
+##(heatmap plots the target variable proportional to colour with respect to two variables)
+plt.pcolor(grouped_pivot, cmap='RdBu')
+plt.colorbar()
+plt.show()
+###Label names
+row_labels = grouped_pivot.columns.levels[1]
+col_labels = grouped_pivot.index
+##Move ticks and labels to the center
+ax.set_xticks(np.arange(grouped_pivot.shape[1]) + 0.5, minor=False)
+ax.set_yticks(np.arange(grouped_pivot.shape[0]) + 0.5, minor=False)
+##Insert labels
+ax.set_xticklabels(row_labels, minor=False)
+ax.set_yticklabels(col_labels, minor=False)
+##Rotate label if too long
+plt.xticks(rotation=90)
+g.colorbar(im)
+##Show
+plt.show()
