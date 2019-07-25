@@ -276,7 +276,7 @@ print( "ANOVA results: F=", f_val, ", P =", p_val)
 
 
 
-DATA VISUALIZATION
+#DATA VISUALIZATION
 
 #Scatter Plot 
 ##(good way to visualize Continuous numerical variables ["int64" or "float64”])
