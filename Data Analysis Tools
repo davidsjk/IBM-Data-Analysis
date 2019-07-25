@@ -45,3 +45,11 @@ df = pd.read_csv(filename, names = headers)
 
 # add header to df
 df.columns = headers
+
+
+
+#SAVE CSV ( and others)
+
+#download to local machine
+df.to_csv("automobile.csv",index = False)
+
