@@ -17,3 +17,31 @@ df_can = pd.read_excel('https://s3-api.us-geo.objectstorage.softlayer.net/cf-cou
                        sheet_name='Canada by Citizenship',
                        skiprows=range(20),
                        skipfooter=2)
+
+#LOAD CSV
+
+#load from online
+
+file_name='https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/DA0101EN/coursera/project/kc_house_data_NaN.csv'
+df=pd.read_csv(file_name)
+
+
+#Load a table without a header
+df=pd.read_csv(file_name, header = None)
+
+# add header to table without header
+1# create header list
+headers = ["symboling","normalized-losses","make","fuel-type","aspiration", "num-of-doors","body-style",
+"drive-wheels","engine-location","wheel-base", "length","width","height","curb-weight","engine-type",
+"num-of-cylinders", "engine-size","fuel-system","bore","stroke","compression-ratio","horsepower",
+"peak-rpm","city-mpg","highway-mpg","price"]
+
+#Add header while creating DF
+headers = ["symboling","normalized-losses","make","fuel-type","aspiration", "num-of-doors","body-style",
+         "drive-wheels","engine-location","wheel-base", "length","width","height","curb-weight","engine-type",
+         "num-of-cylinders", "engine-size","fuel-system","bore","stroke","compression-ratio","horsepower",
+         "peak-rpm","city-mpg","highway-mpg","price"]
+df = pd.read_csv(filename, names = headers)
+
+# add header to df
+df.columns = headers
