@@ -168,3 +168,109 @@ df = pd.concat([df, dummy_variable_1], axis=1)
 #####drop original column "fuel-type" from "df"
 df.drop("fuel-type", axis = 1, inplace=True)
 
+
+
+
+#DATA ANALYSIS
+
+#Print entire dataframe
+df
+
+#Print the first n rows of dataframe
+df.head(n)
+
+#Print the last n rows of dataframe
+df.tail(n)
+
+#Find the names of the columns
+df.columns
+
+#Find data-type of each column
+df.dtypes
+
+#Get statistical summary of each column (Numeric type only)
+df.describe()
+
+#Describe all the columns in "df"
+df.describe(include = "all")
+
+#Describe columns with objects
+df.describe(include=['object'])
+
+#Describe select columns
+df[['length','compression-ratio']].describe()
+
+#Look at the info of "df"
+df.info
+
+$Get list of indicies 
+df.index.values
+
+#get the index and columns as lists
+df_can.columns.tolist()
+df_can.index.tolist()
+
+print (type(df_can.columns.tolist()))
+print (type(df_can.index.tolist()))
+
+#Find the correlation between all variables
+df.corr()
+
+#Find correlation between certain columns
+df[['bore','stroke' ,'compression-ratio','horsepower']].corr()
+
+#Count the occurrence of variable in a column
+df['drive-wheels'].value_counts()
+
+#Make value count to a dataframe
+df['drive-wheels'].value_counts().to_frame()
+
+#Make/Save/Name Header/Name Index of a value count dataframe
+## Make and Save
+drive_wheels_counts = df['drive-wheels'].value_counts().to_frame()
+##Rename Column
+drive_wheels_counts.rename(columns={'drive-wheels': 'value_counts'}, inplace=True)
+##Name index
+drive_wheels_counts.index.name = 'drive-wheels'
+
+#Calculate f the most common type:
+df['num-of-doors'].value_counts().idxmax()
+
+#Get list of unique variable
+df['drive-wheels'].unique()
+
+#Group By
+##Make new DF with necessary columns
+df_group_one = df[['drive-wheels','body-style','price']]
+###Assign the group by column, and find the mean of each group.
+df_group_one = df_group_one.groupby(['drive-wheels'],as_index=False).mean()
+df_group_one
+
+#Group By Multiple Variables
+df_gptest = df[['drive-wheels','body-style','price']]
+grouped_test1 = df_gptest.groupby(['drive-wheels','body-style'],as_index=False).mean()
+## Convert to a Pivot table
+grouped_pivot = grouped_test1.pivot(index='drive-wheels',columns='body-style')
+
+
+#Calculate the Pearson Correlation Coefficient and P-value
+from scipy import stats
+pearson_coef, p_value = stats.pearsonr(df['wheel-base'], df['price'])
+print("The Pearson Correlation Coecient is", pearson_coef, " with a P-value of P =", p_value)
+
+
+#ANOVA: Analysis of Variance
+The Analysis of Variance (ANOVA) is a statistical method used to test whether there are significant
+differences between the means of two or more groups. ANOVA returns two parameters:
+F-test score: ANOVA assumes the means of all groups are the same, calculates how much the
+actual means deviate from the assumption, and reports it as the F-test score. A larger score means
+there is a larger difference between the means.
+P-value: P-value tells how statistically significant is our calculated score value.
+##Groupby different groups in the same variable
+grouped_test2=df_gptest[['drive-wheels', 'price']].groupby(['drive-wheels'])
+##We can obtain the values of the method group using the method "get_group".
+grouped_test2.get_group('4wd')['price']
+##ANOVA
+f_val, p_val = stats.f_oneway(grouped_test2.get_group('fwd')['price'], grouped_test2.get_group('rwd')['price'], grouped_test2.get_group('4wd')['price'])  
+print( "ANOVA results: F=", f_val, ", P =", p_val)
+
