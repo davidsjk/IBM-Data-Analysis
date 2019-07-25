@@ -1,0 +1,19 @@
+#IMPORTING TOOLS (PANDAS, MATPLOTLIB, NUMPY, SEABORN, SKLEARN.Pipeline, SKLEARN.Preprocessing (polynomial features))
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler,PolynomialFeatures
+%matplotlib inline
+from scipy import stats
+
+#install the xlrd module:
+!conda install -c anaconda xlrd --yes
+
+#Load Exel
+df_can = pd.read_excel('https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/DV0101EN/labs/Data_Files/Canada.xlsx',
+                       sheet_name='Canada by Citizenship',
+                       skiprows=range(20),
+                       skipfooter=2)
