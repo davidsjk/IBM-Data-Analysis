@@ -1,6 +1,5 @@
 #IMPORTING TOOLS (PANDAS, MATPLOTLIB, NUMPY, SEABORN, SKLEARN.Pipeline, SKLEARN.Preprocessing (polynomial features))
 
-Let's see if this works
 
 import pandas as pd
 import matplotlib.pyplot as plt
