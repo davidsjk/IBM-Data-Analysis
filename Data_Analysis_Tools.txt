@@ -169,6 +169,31 @@ df = pd.concat([df, dummy_variable_1], axis=1)
 ##drop original column "fuel-type" from "df"
 df.drop("fuel-type", axis = 1, inplace=True)
 
+#create a Total Column
+df_can['Total'] = df_can.sum(axis=1)
+
+#Select Columns
+##Method 1: Quick and easy, but only works if the column name does NOT have spaces or special characters.
+
+    df.column_name 
+        (returns series)
+##Method 2: More robust, and can filter on multiple columns.
+
+    df['column']  
+        (returns series)
+    df[['column 1', 'column 2']] 
+        (returns dataframe)
+        
+#Select Rows
+ df.loc[label]        
+        ##filters by the labels of the index/column
+  df.iloc[index]       
+       # #filters by the positions of the index/column
+
+Set a different Column as Index
+df_can.set_index('Country', inplace=True)
+# tip: The opposite of set is reset. So to reset the index, we can use df_can.reset_index()
+
 
 
 
