@@ -198,6 +198,28 @@ df_can.set_index('Country', inplace=True)
 df_can.index.name = None
 
 
+#change column name from integer to string
+df_can.columns = list(map(str, df_can.columns))
+## [print (type(x)) for x in df_can.columns.values] #<-- uncomment to check type of column headers
+
+#Make a variable with all the columns
+## useful for plotting later on
+years = list(map(str, range(1980, 2014)))
+years
+
+#filter the dataframe based on a condition
+## 1. create the condition boolean series
+condition = df_can['Continent'] == 'Asia'
+print(condition)
+## 2. pass this condition into the dataFrame
+df_can[condition]
+## we can pass mutliple criteria in the same line. 
+## let's filter for AreaNAme = Asia and RegName = Southern Asia
+
+df_can[(df_can['Continent']=='Asia') & (df_can['Region']=='Southern Asia')]
+
+## note: When using 'and' and 'or' operators, pandas requires we use '&' and '|' instead of 'and' and 'or'
+## don't forget to enclose the two conditions in parentheses
 
 
 
@@ -658,3 +680,42 @@ BestRR=Grid1.best_estimator_
 BestRR
 ##We now test our model on the test data
 BestRR.score(x_test[['horsepower', 'curb-weight', 'engine-size', 'highway-mpg']], y_test)
+
+
+#Matplot
+##we are using the inline backend
+%matplotlib inline 
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+## apply a style to Matplotlib
+print(plt.style.available)
+
+
+#line plot
+df.plot()
+##eg
+haiti = df_can.loc['Haiti', years] # passing in years 1980 - 2013 to exclude the 'total' column
+haiti.head()
+haiti.plot()
+##pandas automatically populated the x-axis with the index values (years), and the y-axis with the column values (population). However, notice how the years were not displayed because they are of type string. Therefore, let's change the type of the index values to integer for plotting.
+Also, let's label the x and y axis using plt.title(), plt.ylabel(), and plt.xlabel() as follows:
+
+haiti.index = haiti.index.map(int) # let's change the index values of Haiti to type integer for plotting
+haiti.plot(kind='line')
+
+plt.title('Immigration from Haiti')
+plt.ylabel('Number of immigrants')
+plt.xlabel('Years')
+plt.show() # need this line to show the updates made to the figure
+
+##annotate as special event in the line
+haiti.plot(kind='line')
+plt.title('Immigration from Haiti')
+plt.ylabel('Number of Immigrants')
+plt.xlabel('Years')
+# annotate the 2010 Earthquake. 
+# syntax: plt.text(x, y, label)
+plt.text(2000, 6000, '2010 Earthquake') # see note below
+
+plt.show() 
