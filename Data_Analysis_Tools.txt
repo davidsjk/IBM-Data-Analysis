@@ -296,7 +296,7 @@ sns.boxplot(x="body-style", y="price", data=df)
 plt.pcolor(grouped_pivot, cmap='RdBu')
 plt.colorbar()
 plt.show()
-###Label names
+##Label names
 row_labels = grouped_pivot.columns.levels[1]
 col_labels = grouped_pivot.index
 ##Move ticks and labels to the center
@@ -316,27 +316,27 @@ plt.show()
 ##Create the linear regression object
 lm = LinearRegression()
 lm
-###Define Variables
+##Define Variables
 X = df[['highway-mpg']]
 Y = df['price']
-####Fit linear Model
+##Fit linear Model
 lm.fit(X,Y)
-#####Out put a prediction
+##Out put a prediction
 Yhat=lm.predict(X)
 Yhat[0:5] 
-#####Intercept (a)
+##Intercept (a)
 lm.intercept_
-#####Slope(b)
+##Slope(b)
 lm.coef_
 
-#Calculate R^2
+##Calculate R^2
 lm.score(X,Y)
 
-######FINAL estimated linear Model = Yhat = a + bX
+##FINAL estimated linear Model = Yhat = a + bX
 
 #Regression Plot
 ##(Good for simple linear regressions. )
-# import the visualization package: seaborn
+## import the visualization package: seaborn
 import seaborn as sns
 %matplotlib inline
 ##Enter chart
@@ -348,7 +348,7 @@ plt.ylim(0,)
 
 #Residual Plot
 ##(good way to visualize the variance of the data.If the points in a residual plot are randomly spread out around the x-axis, then a linear model is appropriate for the data.)
-###Code
+##Code
 width = 12
 height = 10
 plt.figure(figsize=(width, height))
@@ -360,17 +360,17 @@ plt.show()
 #Multiple Linear Regression
 ##Define Variable ‘X’
 Z = df[['horsepower', 'curb-weight', 'engine-size', 'highway-mpg']]
-###Fit model
+##Fit model
 lm.fit(Z, df['price'])
-#####Intercept (a)
+##Intercept (a)
 lm.intercept_
-#####Slope(b)
+##Slope(b)
 lm.coef_
 
 # Multiple Linear Regression Plot
 ##First make a Prediction
 Y_hat = lm.predict(Z)
-### Code
+## Code
 plt.figure(figsize=(width, height))
 
 ax1 = sns.distplot(df['price'], hist=False, color="r", label="Actual Value")
@@ -401,7 +401,7 @@ from ipywidgets import interact, interactive, fixed, interact_manual
 
 #Functions for Plotting
 
-##Distribution Plot
+#Distribution Plot
 def DistributionPlot(RedFunction, BlueFunction, RedName, BlueName, Title):
     width = 12
     height = 10
@@ -417,7 +417,7 @@ def DistributionPlot(RedFunction, BlueFunction, RedName, BlueName, Title):
     plt.show()
     plt.close()
 
-##Poliynomial Plot
+#Poliynomial Plot
 def PollyPlot(xtrain, xtest, y_train, y_test, lr,poly_transform):
     width = 12
     height = 10
@@ -448,7 +448,7 @@ def PollyPlot(xtrain, xtest, y_train, y_test, lr,poly_transform):
 y_data = df['price']
 ##drop price data in x data
 x_data=df.drop('price',axis=1)
-###Randomly split our data into training and testing data using the function train_test_split (adjust test size)
+##Randomly split our data into training and testing data using the function train_test_split (adjust test size)
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=0.15, random_state=1)
@@ -481,7 +481,7 @@ print("The mean of the folds are", Rcross.mean(), "and the standard deviation is
 ##We can use negative squared error as a score by setting the parameter 'scoring' metric to 'neg_mean_squared_error'
 -1 * cross_val_score(lre,x_data[['horsepower']], y_data,cv=4,scoring='neg_mean_squared_error')
 
-###You can also use the function 'cross_val_predict' to predict the output. The function splits up the data into the specified number of folds, using one fold to get a prediction while the rest of the folds are used as test data. First import the function:
+##You can also use the function 'cross_val_predict' to predict the output. The function splits up the data into the specified number of folds, using one fold to get a prediction while the rest of the folds are used as test data. First import the function:
 yhat = cross_val_predict(lre,x_data[['horsepower']], y_data,cv=4)
 yhat[0:5]
 
@@ -499,14 +499,14 @@ yhat_test = lr.predict(x_test[['horsepower', 'curb-weight', 'engine-size', 'high
 yhat_test[0:5]
 
 ##Let's perform some model evaluation using our training and testing data separately. 
-###First we import the seaborn and matplotlibb library for plotting.
+##First we import the seaborn and matplotlibb library for plotting.
 import matplotlib.pyplot as plt
 %matplotlib inline
 import seaborn as sns
-###Let's examine the distribution of the predicted values of the training data.
+##Let's examine the distribution of the predicted values of the training data.
 Title = 'Distribution  Plot of  Predicted Value Using Training Data vs Training Data Distribution'
 DistributionPlot(y_train, yhat_train, "Actual Values (Train)", "Predicted Values (Train)", Title)
-###Use test data
+##Use test data
 Title='Distribution  Plot of  Predicted Value Using Test Data vs Data Distribution of Test Data'
 DistributionPlot(y_test,yhat_test,"Actual Values (Test)","Predicted Values (Test)",Title)
 
@@ -527,13 +527,13 @@ yhat[0:5]
 ##Let's take the first five predicted values and compare it to the actual targets.
 print("Predicted values:", yhat[0:4])
 print("True values:", y_test[0:4].values)
-###display the training data, testing data, and the predicted function using PollyPlot
+##display the training data, testing data, and the predicted function using PollyPlot
 PollyPlot(x_train[['horsepower']], x_test[['horsepower']], y_train, y_test, poly,pr)
-###R^2 of the training data:
+##R^2 of the training data:
 poly.score(x_train_pr, y_train)
-###R^2 of the test data:
+##R^2 of the test data:
 poly.score(x_test_pr, y_test)
-####Let's see how the R^2 changes on the test data for different order polynomials and plot the results:
+##Let's see how the R^2 changes on the test data for different order polynomials and plot the results:
 Rsqu_test = []
 
 order = [1, 2, 3, 4]
@@ -610,7 +610,7 @@ plt.legend()
 
 
 #Grid Search
-#The term Alfa is a hyperparameter, sklearn has the class GridSearchCV to make the process of finding the best hyperparameter simpler.
+##The term Alfa is a hyperparameter, sklearn has the class GridSearchCV to make the process of finding the best hyperparameter simpler.
 ##Let's import GridSearchCV from the module model_selection.
 from sklearn.model_selection import GridSearchCV
 ##We create a dictionary of parameter values:
