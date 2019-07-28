@@ -194,6 +194,11 @@ Set a different Column as Index
 df_can.set_index('Country', inplace=True)
 # tip: The opposite of set is reset. So to reset the index, we can use df_can.reset_index()
 
+# optional: to remove the name of the index
+df_can.index.name = None
+
+
+
 
 
 
