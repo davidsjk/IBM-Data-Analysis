@@ -310,3 +310,26 @@ plt.xticks(rotation=90)
 g.colorbar(im)
 ##Show
 plt.show()
+
+
+#Linear Regression
+##Create the linear regression object
+lm = LinearRegression()
+lm
+###Define Variables
+X = df[['highway-mpg']]
+Y = df['price']
+####Fit linear Model
+lm.fit(X,Y)
+#####Out put a prediction
+Yhat=lm.predict(X)
+Yhat[0:5] 
+#####Intercept (a)
+lm.intercept_
+#####Slope(b)
+lm.coef_
+
+#Calculate R^2
+lm.score(X,Y)
+
+######FINAL estimated linear Model = Yhat = a + bX
