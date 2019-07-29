@@ -112,49 +112,7 @@ df['city-L/100km'] = 235/df["city-mpg"]
 df['length'] = df['length']/df['length'].max()
 df['width'] = df['width']/df['width'].max()
 
-#Binning
-##Binning is a process of transforming continuous numerical variables into discrete categorical 'bins', for grouped analysis.
-##Convert data to correct format
-df["horsepower"]=df["horsepower"].astype(int, copy=True)
-##Lets plot the histogram of horspower, to see what the distribution of horsepower looks like.
-%matplotlib inline
-import matplotlib as plt
-from matplotlib import pyplot
-plt.pyplot.hist(df["horsepower"])
-## set x/y labels and plot title
-plt.pyplot.xlabel("horsepower")
-plt.pyplot.ylabel("count")
-plt.pyplot.title("horsepower bins")
-##Create BIN
-bins = np.linspace(min(df["horsepower"]), max(df["horsepower"]), 4)
-bins
-##set group names:
-group_names = ['Low', 'Medium', 'High']
-##Cut
-df['horsepower-binned'] = pd.cut(df['horsepower'], bins, labels=group_names, include_lowest=True )
-df[['horsepower','horsepower-binned']].head(20)
-##Lets see the number of vehicles in each bin.
-df["horsepower-binned"].value_counts()
-##Plot Bin
-%matplotlib inline
-import matplotlib as plt
-from matplotlib import pyplot
-pyplot.bar(group_names, df["horsepower-binned"].value_counts())
-## set x/y labels and plot title
-plt.pyplot.xlabel("horsepower")
-plt.pyplot.ylabel("count")
-plt.pyplot.title("horsepower bins")
-##Create histogram for Bin
-%matplotlib inline
-import matplotlib as plt
-from matplotlib import pyplot
-a = (0,1,2)
-## draw historgram of attribute "horsepower" with bins = 3
-plt.pyplot.hist(df["horsepower"], bins = 3)
-## set x/y labels and plot title
-plt.pyplot.xlabel("horsepower")
-plt.pyplot.ylabel("count")
-plt.pyplot.title("horsepower bins")
+
 
 
 #Indicator Variable
@@ -807,3 +765,101 @@ plt.ylabel('Number of Immigrants')
 plt.xlabel('Years')
 
 plt.show()
+
+
+
+
+#Binning
+##Binning is a process of transforming continuous numerical variables into discrete categorical 'bins', for grouped analysis.
+##Convert data to correct format
+df["horsepower"]=df["horsepower"].astype(int, copy=True)
+##Lets plot the histogram of horspower, to see what the distribution of horsepower looks like.
+%matplotlib inline
+import matplotlib as plt
+from matplotlib import pyplot
+plt.pyplot.hist(df["horsepower"])
+## set x/y labels and plot title
+plt.pyplot.xlabel("horsepower")
+plt.pyplot.ylabel("count")
+plt.pyplot.title("horsepower bins")
+##Create BIN
+bins = np.linspace(min(df["horsepower"]), max(df["horsepower"]), 4)
+bins
+##set group names:
+group_names = ['Low', 'Medium', 'High']
+##Cut
+df['horsepower-binned'] = pd.cut(df['horsepower'], bins, labels=group_names, include_lowest=True )
+df[['horsepower','horsepower-binned']].head(20)
+##Lets see the number of vehicles in each bin.
+df["horsepower-binned"].value_counts()
+##Plot Bin
+%matplotlib inline
+import matplotlib as plt
+from matplotlib import pyplot
+pyplot.bar(group_names, df["horsepower-binned"].value_counts())
+## set x/y labels and plot title
+plt.pyplot.xlabel("horsepower")
+plt.pyplot.ylabel("count")
+plt.pyplot.title("horsepower bins")
+##Create histogram for Bin
+%matplotlib inline
+import matplotlib as plt
+from matplotlib import pyplot
+a = (0,1,2)
+## draw historgram of attribute "horsepower" with bins = 3
+plt.pyplot.hist(df["horsepower"], bins = 3)
+## set x/y labels and plot title
+plt.pyplot.xlabel("horsepower")
+plt.pyplot.ylabel("count")
+plt.pyplot.title("horsepower bins")
+
+#Histogram# 
+np.histogram returns 2 values
+count, bin_edges = np.histogram(df_can['2013'])
+
+print(count) # frequency count
+print(bin_edges) # bin ranges, default = 10 bins
+##By default, the histrogram method breaks up the dataset into 10 bins.
+##We can easily graph this distribution by passing kind=hist to plot().
+df_can['2013'].plot(kind='hist', figsize=(8, 5))
+
+plt.title('Histogram of Immigration from 195 Countries in 2013') # add a title to the histogram
+plt.ylabel('Number of Countries') # add y-label
+plt.xlabel('Number of Immigrants') # add x-label
+
+plt.show()
+##Notice that the x-axis labels do not match with the bin size. This can be fixed by passing in a xticks keyword that contains the list of the bin sizes, as follows:
+
+# 'bin_edges' is a list of bin intervals
+count, bin_edges = np.histogram(df_can['2013'])
+
+df_can['2013'].plot(kind='hist', figsize=(8, 5), xticks=bin_edges)
+
+plt.title('Histogram of Immigration from 195 countries in 2013') # add a title to the histogram
+plt.ylabel('Number of Countries') # add y-label
+plt.xlabel('Number of Immigrants') # add x-label
+
+plt.show()
+
+
+#Multiple bins
+## let's get the x-tick values
+count, bin_edges = np.histogram(df_t, 15)
+
+## un-stacked histogram
+df_t.plot(kind ='hist', 
+          figsize=(10, 6),
+          bins=15,
+          alpha=0.6,
+          xticks=bin_edges,
+          color=['coral', 'darkslateblue', 'mediumseagreen']
+         )
+
+plt.title('Histogram of Immigration from Denmark, Norway, and Sweden from 1980 - 2013')
+plt.ylabel('Number of Years')
+plt.xlabel('Number of Immigrants')
+
+plt.show()
+
+
+
