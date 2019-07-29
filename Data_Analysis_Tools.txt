@@ -890,4 +890,28 @@ plt.xlabel('Number of Immigrants')
 
 plt.show()
 
+#Summary Histogram
+## generate histogram
+df_gab = df_can.loc[['Greece', 'Albania', 'Bulgaria'], years]
+df_gab = df_gab.transpose()
+df_gab.head()
+
+## let's get the x-tick values
+count, bin_edges = np.histogram(df_gab, 15)
+
+## un-stacked histogram
+df_gab.plot(kind ='hist', 
+          figsize=(10, 6),
+          bins=15,
+          alpha=0.35,
+          xticks=bin_edges,
+          color=['coral', 'darkslateblue', 'mediumseagreen']
+         )
+
+plt.title('Histogram of Immigration from Greece, Albania, and Bulgaria from 1980 - 2013')
+plt.ylabel('Number of Years')
+plt.xlabel('Number of Immigrants')
+
+plt.show()
+
 
