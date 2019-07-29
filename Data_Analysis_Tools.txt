@@ -222,6 +222,9 @@ df_can[(df_can['Continent']=='Asia') & (df_can['Region']=='Southern Asia')]
 ## don't forget to enclose the two conditions in parentheses
 
 
+# let's examine the types of the column labels (check to see if they are all strings)
+all(isinstance(column, str) for column in df_can.columns)
+
 
 
 #DATA ANALYSIS
@@ -719,3 +722,6 @@ plt.xlabel('Years')
 plt.text(2000, 6000, '2010 Earthquake') # see note below
 
 plt.show() 
+
+
+This is a test
