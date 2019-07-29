@@ -724,4 +724,3 @@ plt.text(2000, 6000, '2010 Earthquake') # see note below
 plt.show() 
 
 
-This is a test
