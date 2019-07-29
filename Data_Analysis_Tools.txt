@@ -890,4 +890,80 @@ plt.xlabel('Number of Immigrants')
 
 plt.show()
 
+#Summary Histogram
+## generate histogram
+df_gab = df_can.loc[['Greece', 'Albania', 'Bulgaria'], years]
+df_gab = df_gab.transpose()
+df_gab.head()
+
+## let's get the x-tick values
+count, bin_edges = np.histogram(df_gab, 15)
+
+## un-stacked histogram
+df_gab.plot(kind ='hist', 
+          figsize=(10, 6),
+          bins=15,
+          alpha=0.35,
+          xticks=bin_edges,
+          color=['coral', 'darkslateblue', 'mediumseagreen']
+         )
+
+plt.title('Histogram of Immigration from Greece, Albania, and Bulgaria from 1980 - 2013')
+plt.ylabel('Number of Years')
+plt.xlabel('Number of Immigrants')
+
+plt.show()
+
+
+#Bar Chart
+##To create a bar plot, we can pass one of two arguments via kind parameter in plot():
+##kind=bar creates a vertical bar plot
+##kind=barh creates a horizontal bar plot
+
+df_iceland.plot(kind='bar', figsize=(10, 6), rot=90) 
+
+plt.xlabel('Year')
+plt.ylabel('Number of Immigrants')
+plt.title('Icelandic Immigrants to Canada from 1980 to 2013')
+
+## Annotate arrow
+plt.annotate('',                      # s: str. will leave it blank for no text
+             xy=(32, 70),             # place head of the arrow at point (year 2012 , pop 70)
+             xytext=(28, 20),         # place base of the arrow at point (year 2008 , pop 20)
+             xycoords='data',         # will use the coordinate system of the object being annotated 
+             arrowprops=dict(arrowstyle='->', connectionstyle='arc3', color='blue', lw=2)
+            )
+
+## Annotate Text
+plt.annotate('2008 - 2011 Financial Crisis', # text to display
+             xy=(28, 30),                    # start the text at at point (year 2008 , pop 30)
+             rotation=72.5,                  # based on trial and error to match the arrow
+             va='bottom',                    # want the text to be vertically 'bottom' aligned
+             ha='left',                      # want the text to be horizontally 'left' algned.
+            )
+
+plt.show()
+
+
+#Simple Horizontal Bar 
+df_can.sort_values(by='Total', ascending=True, inplace=True)
+
+# get top 15 countries
+df_top15 = df_can['Total'].tail(15)
+df_top15
+
+
+df_top15.plot(kind='barh', figsize=(12, 12), color='steelblue')
+plt.xlabel('Number of Immigrants')
+plt.title('Top 15 Conuntries Contributing to the Immigration to Canada between 1980 - 2013')
+
+ # annotate value labels to each country
+for index, value in enumerate(df_top15): 
+    label = format(int(value), ',') # format int with commas
+    # place text at the end of bar (subtracting 47000 from x, and 0.1 from y to make it fit within the bar)
+    plt.annotate(label, xy=(value - 47000, index - 0.10), color='white')
+
+
+
+
 
