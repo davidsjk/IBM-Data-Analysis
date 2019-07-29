@@ -766,3 +766,44 @@ pie for pie plots
 scatter for scatter plots
 hexbin for hexbin plot
 
+
+
+
+#Stacked line Plot/ Area Plot
+## use the inline backend to generate the plots within the browser
+%matplotlib inline 
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+mpl.style.use('ggplot') # optional: for ggplot-like style
+
+## check for latest version of Matplotlib
+print ('Matplotlib version: ', mpl.__version__) # >= 2.0.0
+
+##Area plots are stacked by default. And to produce a stacked area plot, each column must be either all positive or all negative values (any NaN values will defaulted to 0). To produce an unstacked plot, pass stacked=False.
+
+df_top5.index = df_top5.index.map(int) # let's change the index values of df_top5 to type integer for plotting
+df_top5.plot(kind='area', 
+             stacked=False,
+             figsize=(20, 10), # pass a tuple (x, y) size
+             )
+
+plt.title('Immigration Trend of Top 5 Countries')
+plt.ylabel('Number of Immigrants')
+plt.xlabel('Years')
+
+plt.show()
+
+##Modify transparency with a value
+df_top5.plot(kind='area', 
+             alpha=0.25, # 0-1, default value a= 0.5
+             stacked=False,
+             figsize=(20, 10),
+            )
+
+plt.title('Immigration Trend of Top 5 Countries')
+plt.ylabel('Number of Immigrants')
+plt.xlabel('Years')
+
+plt.show()
