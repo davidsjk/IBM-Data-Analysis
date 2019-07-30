@@ -132,6 +132,15 @@ df_can['Total'] = df_can.sum(axis=1)
 years = list(map(str, range(1980, 2014)))
 print('data dimensions:', df_can.shape)
 
+##groupby
+### group countries by continents and apply sum() function 
+df_continents = df_can.groupby('Continent', axis=0).sum()
+
+### note: the output of the groupby method is a `groupby' object. 
+### we can not use it further until we apply a function (eg .sum())
+print(type(df_can.groupby('Continent', axis=0)))
+df_continents.head()
+
 
 #Indicator Variable
 ##(An indicator variable (or dummy variable) is a numerical variable used to label categories. They are called 'dummies' because the numbers themselves don't have inherent meaning.
@@ -982,6 +991,19 @@ for index, value in enumerate(df_top15):
     plt.annotate(label, xy=(value - 47000, index - 0.10), color='white')
 
 
+#Pie Chart
+# autopct create %, start angle represent starting point
+df_continents['Total'].plot(kind='pie',
+                            figsize=(5, 6),
+                            autopct='%1.1f%%', # add in percentages
+                            startangle=90,     # start angle 90° (Africa)
+                            shadow=True,       # add shadow      
+                            )
+
+plt.title('Immigration to Canada by Continent [1980 - 2013]')
+plt.axis('equal') # Sets the pie chart to look like a circle.
+
+plt.show()
 
 
 
