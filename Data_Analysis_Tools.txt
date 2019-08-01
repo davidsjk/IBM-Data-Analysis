@@ -1165,3 +1165,36 @@ No. Immigrants = 291,310
 
 
 #Another Example of Scatter Plot 
+## create df_countries dataframe
+df_countries = df_can.loc[['Denmark', 'Norway', 'Sweden'], years].transpose()
+df_countries.head()
+
+## create df_total by summing across three countries for each year
+df_total = pd.DataFrame(df_countries.sum(axis=1))
+df_total.head()
+
+## reset index in place
+df_total.reset_index(inplace=True)
+df_total.head()
+
+## rename columns
+df_total.columns = ['year', 'total']
+
+## change column year from string to int to create scatter plot
+df_total['year'] = df_total['year'].astype(int)
+
+## show resulting dataframe
+df_total.head()
+
+## generate scatter plot
+df_total.plot(kind='scatter', x='year', y='total', figsize=(10, 6), color='darkblue')
+## add title and label to axes
+plt.title('Immigration from Denmark, Norway, and Sweden to Canada from 1980 - 2013')
+plt.xlabel('Year')
+plt.ylabel('Number of Immigrants')
+
+## show plot
+plt.show()
+
+
+
