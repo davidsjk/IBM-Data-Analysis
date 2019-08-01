@@ -1110,6 +1110,7 @@ plt.show()
 
 
 #Scatter Plot
+##Prep
 ## we can use the sum() method to get the total population per year
 df_tot = pd.DataFrame(df_can[years].sum(axis=0))
 
@@ -1124,6 +1125,12 @@ df_tot.columns = ['year', 'total']
 
 ## view the final dataframe
 df_tot.head()
+df_tot.plot(kind='scatter', x='year', y='total', figsize=(10, 6), color='darkblue')
 
+plt.title('Total Immigration to Canada from 1980 - 2013')
+plt.xlabel('Year')
+plt.ylabel('Number of Immigrants')
+
+plt.show()
 
 
