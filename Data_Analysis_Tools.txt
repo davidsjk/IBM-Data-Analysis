@@ -1133,4 +1133,35 @@ plt.ylabel('Number of Immigrants')
 
 plt.show()
 
+#Regression to Scatter Plot
+df_tot.plot(kind='scatter', x='year', y='total', figsize=(10, 6), color='darkblue')
 
+plt.title('Total Immigration to Canada from 1980 - 2013')
+plt.xlabel('Year')
+plt.ylabel('Number of Immigrants')
+
+plt.show()
+df_tot.plot(kind='scatter', x='year', y='total', figsize=(10, 6), color='darkblue')
+
+plt.title('Total Immigration to Canada from 1980 - 2013')
+plt.xlabel('Year')
+plt.ylabel('Number of Immigrants')
+
+# plot line of best fit
+plt.plot(x, fit[0] * x + fit[1], color='red') # recall that x is the Years
+plt.annotate('y={0:.0f} x + {1:.0f}'.format(fit[0], fit[1]), xy=(2000, 150000))
+
+plt.show()
+
+# print out the line of best fit
+'No. Immigrants = {0:.0f} * Year + {1:.0f}'.format(fit[0], fit[1]) 
+
+#The output is an array with the polynomial coefficients, highest powers first. Since we are plotting a linear regression y= a*x + b, our output has 2 elements [5.56709228e+03, -1.09261952e+07] with the the slope in position 0 and intercept in position 1.
+Step 2: Plot the regression line on the scatter plot.
+#Using the equation of line of best fit, we can estimate the number of immigrants in 2015:
+No. Immigrants = 5567 * Year - 10926195
+No. Immigrants = 5567 * 2015 - 10926195
+No. Immigrants = 291,310
+
+
+#Another Example of Scatter Plot 
