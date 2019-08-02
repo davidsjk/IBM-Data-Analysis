@@ -1692,6 +1692,36 @@ world_map = folium.Map(location=[56.130, -106.35], zoom_start=4)
 world_map
 
 
+#Folium Summary
+## define Mexico's geolocation coordinates
+mexico_latitude = 23.6345 
+mexico_longitude = -102.5528
+
+## define the world map centered around Canada with a higher zoom level
+mexico_map = folium.Map(location=[mexico_latitude, mexico_longitude], zoom_start=4)
+
+## display world map
+mexico_map
+
+
+#Stamen Toner Maps (Black and White Maps)
+## create a Stamen Toner map of the world centered around Canada
+world_map = folium.Map(location=[56.130, -106.35], zoom_start=4, tiles='Stamen Toner')
+
+## display map
+world_map
+
+
+#Stamen Terrain Maps
+## create a Stamen Toner map of the world centered around Canada
+world_map = folium.Map(location=[56.130, -106.35], zoom_start=4, tiles='Stamen Terrain')
+
+## display map
+world_map
+
+
+
+
 
 
 
