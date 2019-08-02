@@ -1720,14 +1720,31 @@ world_map = folium.Map(location=[56.130, -106.35], zoom_start=4, tiles='Stamen T
 world_map
 
 
-#Mapbox Bright Maps (boarders not visible up close, and country name in native language)
+#Mapbox Bright Maps (boarders visible up close, and country name in native language)
 # create a world map with a Mapbox Bright style.
 world_map = folium.Map(tiles='Mapbox Bright')
 
 # display the map
 world_map
 
+#Maps with Markers
+##Let's download and import the data on police department incidents using pandas read_csv() method.
+##Download the dataset and read it into a pandas dataframe:
+df_incidents = pd.read_csv('https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/DV0101EN/labs/Data_Files/Police_Department_Incidents_-_Previous_Year__2016_.csv')
 
+print('Dataset downloaded and read into a pandas dataframe!')
 
+df_incidents.head()
+
+df_incidents.shape
+
+## get the first 100 crimes in the df_incidents dataframe
+limit = 100
+df_incidents = df_incidents.iloc[0:limit, :]
+df_incidents.shape
+
+# San Francisco latitude and longitude values
+latitude = 37.77
+longitude = -122.42
 
 
