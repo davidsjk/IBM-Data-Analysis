@@ -1803,3 +1803,44 @@ for lat, lng, label in zip(latitudes, longitudes, labels):
 sanfran_map.add_child(incidents)
 
 
+#Add Text with no markers
+## create map and display it
+sanfran_map = folium.Map(location=[latitude, longitude], zoom_start=12)
+
+## loop through the 100 crimes and add each to the map
+for lat, lng, label in zip(df_incidents.Y, df_incidents.X, df_incidents.Category):
+    folium.features.CircleMarker(
+        [lat, lng],
+        radius=5, # define how big you want the circle markers to be
+        color='yellow',
+        fill=True,
+        popup=label,
+        fill_color='blue',
+        fill_opacity=0.6
+    ).add_to(sanfran_map)
+
+## show map
+sanfran_map
+
+
+#Make Clusters
+from folium import plugins
+
+# let's start again with a clean copy of the map of San Francisco
+sanfran_map = folium.Map(location = [latitude, longitude], zoom_start = 12)
+
+# instantiate a mark cluster object for the incidents in the dataframe
+incidents = plugins.MarkerCluster().add_to(sanfran_map)
+
+# loop through the dataframe and add each data point to the mark cluster
+for lat, lng, label, in zip(df_incidents.Y, df_incidents.X, df_incidents.Category):
+    folium.Marker(
+        location=[lat, lng],
+        icon=None,
+        popup=label,
+    ).add_to(incidents)
+
+# display map
+sanfran_map
+
+
