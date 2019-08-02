@@ -1826,13 +1826,13 @@ sanfran_map
 #Make Clusters
 from folium import plugins
 
-# let's start again with a clean copy of the map of San Francisco
+## let's start again with a clean copy of the map of San Francisco
 sanfran_map = folium.Map(location = [latitude, longitude], zoom_start = 12)
 
-# instantiate a mark cluster object for the incidents in the dataframe
+## instantiate a mark cluster object for the incidents in the dataframe
 incidents = plugins.MarkerCluster().add_to(sanfran_map)
 
-# loop through the dataframe and add each data point to the mark cluster
+## loop through the dataframe and add each data point to the mark cluster
 for lat, lng, label, in zip(df_incidents.Y, df_incidents.X, df_incidents.Category):
     folium.Marker(
         location=[lat, lng],
@@ -1840,8 +1840,10 @@ for lat, lng, label, in zip(df_incidents.Y, df_incidents.X, df_incidents.Categor
         popup=label,
     ).add_to(incidents)
 
-# display map
+## display map
 sanfran_map
+
+
 
 #Choropleth Maps
 ##Download the dataset and read it into a pandas dataframe:
@@ -1874,6 +1876,16 @@ df_can['Total'] = df_can.sum(axis=1)
 years = list(map(str, range(1980, 2014)))
 print ('data dimensions:', df_can.shape)
 
+## download countries geojson file
+!wget --quiet https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/DV0101EN/labs/Data_Files/world_countries.json -O world_countries.json
+    
+print('GeoJSON file downloaded!')
+
+##Now that we have the GeoJSON file, let's create a world map
+world_geo = r'world_countries.json' # geojson file
+
+# create a plain world map
+world_map = folium.Map(location=[0, 0], zoom_start=2, tiles='Mapbox Bright')
 
 
 
