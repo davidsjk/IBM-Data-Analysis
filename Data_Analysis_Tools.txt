@@ -1720,6 +1720,12 @@ world_map = folium.Map(location=[56.130, -106.35], zoom_start=4, tiles='Stamen T
 world_map
 
 
+#Mapbox Bright Maps (boarders not visible up close, and country name in native language)
+# create a world map with a Mapbox Bright style.
+world_map = folium.Map(tiles='Mapbox Bright')
+
+# display the map
+world_map
 
 
 
