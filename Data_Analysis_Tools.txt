@@ -215,6 +215,18 @@ all(isinstance(column, str) for column in df_can.columns)
 df_data['Very interested'] = round(df_data['Very interested']*100/2233,2)
 
 
+#Creating a occurance Count
+df_crime1= df_sf['PdDistrict'].value_counts().to_frame()
+df_crime1
+
+##or
+
+df_crime = df_sf.drop(['Category','Descript','DayOfWeek','Date','Time','Resolution','Address','X','Y','Location','PdId'], axis=1, inplace=False)
+df_crime = df_crime.groupby(['PdDistrict'], as_index = False).count()
+df_crime=df_crime.rename(columns={'PdDistrict':'Neighborhood','IncidntNum':'Count'})
+df_crime
+
+
 
 #DATA ANALYSIS
 
@@ -1963,5 +1975,8 @@ world_map.choropleth(
     reset=True
 )
 world_map
+
+
+#
 
 
