@@ -3583,9 +3583,10 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": null,
    "metadata": {
     "button": false,
+    "collapsed": true,
     "jupyter": {
      "outputs_hidden": true
     },
@@ -3594,35 +3595,10 @@
      "read_only": false
     }
    },
-   "outputs": [
-    {
-     "ename": "NameError",
-     "evalue": "name 'df_can' is not defined",
-     "output_type": "error",
-     "traceback": [
-      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
-      "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
-      "\u001b[0;32m<ipython-input-2-c6e23e317eea>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;31m### type your answer here\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m \u001b[0mdf_top15\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mdf_can\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'Total'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m15\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      3\u001b[0m \u001b[0;31m# generate plot\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mdf_top15\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mkind\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m'barh'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mfigsize\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m12\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m12\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcolor\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m'steelblue'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mxlabel\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Number of Immigrants'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
-      "\u001b[0;31mNameError\u001b[0m: name 'df_can' is not defined"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "### type your answer here\n",
-    "df_top15 = df_can['Total'].tail(15)\n",
-    "# generate plot\n",
-    "df_top15.plot(kind='barh', figsize=(12, 12), color='steelblue')\n",
-    "plt.xlabel('Number of Immigrants')\n",
-    "plt.title('Top 15 Conuntries Contributing to the Immigration to Canada between 1980 - 2013')\n",
     "\n",
-    "# annotate value labels to each country\n",
-    "for index, value in enumerate(df_top15): \n",
-    "    label = format(int(value), ',') # format int with commas\n",
-    "    \n",
-    "    # place text at the end of bar (subtracting 47000 from x, and 0.1 from y to make it fit within the bar)\n",
-    "    plt.annotate(label, xy=(value - 47000, index - 0.10), color='white')\n",
-    "\n",
-    "plt.show()\n",
     "\n",
     "\n"
    ]
