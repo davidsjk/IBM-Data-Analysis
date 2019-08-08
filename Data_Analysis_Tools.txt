@@ -211,6 +211,22 @@ df_can[(df_can['Continent']=='Asia') & (df_can['Region']=='Southern Asia')]
 all(isinstance(column, str) for column in df_can.columns)
 
 
+#Create a Percentage
+df_data['Very interested'] = round(df_data['Very interested']*100/2233,2)
+
+
+#Creating a occurance Count
+df_crime1= df_sf['PdDistrict'].value_counts().to_frame()
+df_crime1
+
+##or
+
+df_crime = df_sf.drop(['Category','Descript','DayOfWeek','Date','Time','Resolution','Address','X','Y','Location','PdId'], axis=1, inplace=False)
+df_crime = df_crime.groupby(['PdDistrict'], as_index = False).count()
+df_crime=df_crime.rename(columns={'PdDistrict':'Neighborhood','IncidntNum':'Count'})
+df_crime
+
+
 
 #DATA ANALYSIS
 
@@ -989,6 +1005,38 @@ for index, value in enumerate(df_top15):
     label = format(int(value), ',') # format int with commas
     # place text at the end of bar (subtracting 47000 from x, and 0.1 from y to make it fit within the bar)
     plt.annotate(label, xy=(value - 47000, index - 0.10), color='white')
+
+
+#Advanced Bar Chart with Percentage
+import matplotlib.pyplot as plt
+
+ax = df_data.plot(kind='bar', figsize=(20, 8), width=0.8, fontsize=14, color=['#5cb85c','#5bc0de','#d9534f'])
+
+ax.set_title('Pecentage of Respondents\'Interest in Data Science Area', fontsize=16)
+ax.legend(fontsize=14)
+
+ax.get_yaxis().set_visible(False)
+
+ax.spines['top'].set_visible(False)
+
+ax.spines['right'].set_visible(False)
+
+ax.spines['left'].set_visible(False)
+
+
+for p in ax.patches:
+    width, height = p.get_width(), p.get_height()
+    height = height.round(2)
+    x, y = p.get_xy()
+    ax.annotate(height,(p.get_x()+.15*width, p.get_y() + height + 2.25))
+
+for p in ax.patches:
+    width, height = p.get_width(), p.get_height()
+    height = height.round(2)
+    x, y = p.get_xy()
+    ax.annotate('%',(p.get_x()+.76*width, p.get_y() + height + 2.25))
+
+
 
 
 #Simple Pie Chart
@@ -1927,3 +1975,29 @@ world_map.choropleth(
     reset=True
 )
 world_map
+
+
+#Choropleth map
+
+
+sf_geo = r'san-francisco.geojson' # geojson file
+
+# create a plain world map
+sf_map = folium.Map(location=[37.7749300, -122.4194200], zoom_start=12)
+
+# generate choropleth map using the count
+sf_map.choropleth(
+    geo_data=sf_geo,
+    data=df_crime,
+    columns=['Neighborhood','Count'],
+    key_on='feature.properties.DISTRICT',
+    fill_color='YlOrRd', 
+    fill_opacity=0.7, 
+    line_opacity=0.2,
+    legend_name='Crime Rate in San Francisco'
+)
+
+# display map
+sf_map
+
+
